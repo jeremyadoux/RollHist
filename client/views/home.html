@@ -1,0 +1,28 @@
+<section id="main">
+    <section id="content">
+        <div class="container">
+          <div class="row block-header">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 campaign-button">
+              <button data-ui-sref="campaign.list" class="btn btn-primary btn-lg waves-effect btn-block">Ouvrir une campagne existante</button>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+          <div class="row block-header">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 campaign-button" ng-controller="CampaignAction as vmCC">
+              <button ng-click="vmCC.openCreateModal()" class="btn btn-primary btn-lg waves-effect btn-block">Créer une nouvelle campagne</button>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+          <div class="row block-header">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 campaign-button">
+              <button data-ui-sref="home" class="btn btn-primary btn-lg waves-effect btn-block">Accéder à la bibliothèque</button>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+        </div>
+    </section>
+</section>
+

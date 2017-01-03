@@ -1,0 +1,76 @@
+<div class="container" ng-controller="rencontreDetailController as vmRD">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{vmRD.rencontre.name}}</h2>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body card-padding">
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-primary waves-effect" ng-click="vmRD.sendAllInitiative()">Send Initiative</button>
+          <button class="btn btn-primary waves-effect" ng-click="vmRD.addPlayerInitiative()">Add player Init</button>
+          <button ng-show="!vmRD.fight" class="btn btn-primary waves-effect" ng-click="vmRD.startFight()">Start fight</button>
+          <button ng-show="vmRD.fight" class="btn btn-primary waves-effect" ng-click="vmRD.nextPlayer()">Next player</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row" ng-show="vmRD.fight">
+            <div class="col-sm-12 m-b-20">
+              <span class="f-500 c-black m-b-5"><button class="btn btn-primary waves-effect" ng-click="vmRD.stopAlertTimer = !vmRD.stopAlertTimer">Stop Alert</button></span>
+            </div>
+            <div class="col-sm-12 m-b-20">
+              <span class="f-500 c-black m-b-5">Nb second/turn : <input type="text" ng-model="vmRD.secondePerTurn" /> </span>
+            </div>
+            <div class="col-sm-12 m-b-20">
+              <span class="f-500 c-black m-b-5">Current timer turn : {{vmRD.transformTimeToHourMinutesSeconde(vmRD.fight.currentTimer)}}</span>
+            </div>
+            <div class="col-sm-12 m-b-20">
+              <span class="f-500 c-black m-b-5">Total time : {{vmRD.transformTimeToHourMinutesSeconde(vmRD.fight.totalTime)}}</span>
+            </div>
+            <div class="col-sm-12 m-b-20">
+              <span class="f-500 c-black m-b-5">Round : {{vmRD.fight.round}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 m-b-20">
+              <p class="f-500 m-b-20 c-black">Currents effects</p>
+              <ul class="list-group">
+                <li class="list-group-item" ng-repeat="effect in vmRD.playerList[vmRD.fight.currentPlayerIndex].effectTarget" ng-class="{'disabled': effect.stopped}">
+                  <div class="row">
+                    <div class="col-sm-12 m-b-20">
+                      <span class="f-500 c-black m-b-5" ng-class="{'line-through': effect.stopped}">{{effect.description}}</span>
+                    </div>
+                    <div class="col-sm-12 m-b-20">
+                      <span ng-show="effect.savedDice" class="f-500 c-black m-b-5">Sauvegarde : {{effect.savedDice}}</span>
+                      <span ng-show="!effect.roundInfinite" class="f-500 c-black m-b-5">Round : {{effect.round}}</span>
+                    </div>
+                    <div class="col-sm-12 m-b-20">
+                      <button ng-show="effect.sauvegarde" class="btn btn-primary waves-effect" ng-click="effect.$sauvegardeDice()">Sauvegarde</button>
+                      <button class="btn btn-primary waves-effect" ng-click="effect.$remove()">Remove</button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="table-responsive">
+            <rencontre-line ng-repeat="player in vmRD.playerList" playable="player"></rencontre-line>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body card-padding">
+      <div class="row">
+        <div class="col-sm-6" ng-repeat="pnj in vmRD.rencontre.pnj">
+          <cadre-pnj pnj="pnj"></cadre-pnj>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

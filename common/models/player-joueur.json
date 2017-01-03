@@ -1,0 +1,40 @@
+{
+  "name": "PlayerJoueur",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "level": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "picture": {
+      "type": "belongsTo",
+      "model": "Picture",
+      "foreignKey": "pictureId",
+      "required": false
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "authorId",
+      "required": false
+    },
+    "campaigns": {
+      "type": "hasMany",
+      "model": "Campaign",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

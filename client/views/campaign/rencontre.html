@@ -1,0 +1,78 @@
+<div  ng-controller="RencontreGrid as vmRG" ng-class="{ 'sw-toggled-rencontre': vmRG.openToolbarAddObj}">
+  <div id="canvasContainer">
+    <button class="btn btn-success waves-effect btn-rigth-float" ng-click="vmRG.openToolbarAddObj=true">
+      <i class="zmdi zmdi-plus"></i>
+    </button>
+    <button ng-show="vmRG.currentStep == 0" ng-click="vmRG.nextStep()" class="btn btn-success waves-effect btn-left-float">
+      <i class="zmdi zmdi-mail-send"></i>
+    </button>
+    <canvas id="canvas" droppable drop="vmRG.handleDrop(arg1)"></canvas>
+  </div>
+  <aside id="sidebar-added-obj">
+    <div class="sidebar-inner">
+      <div class="listview lv-bordered lv-lg">
+        <div class="lv-body">
+          <div class="row row-eq-height">
+            <div class="col-xs-1 vcenter">
+              <button ng-click="vmRG.openToolbarAddObj=false" class="btn btn-danger btn-icon waves-effect waves-circle"><i class="zmdi zmdi-arrow-back"></i></button>
+            </div>
+            <div class="col-xs-11 vcenter">
+              <ul class="tab-nav">
+                <li ng-class="{'active': vmRG.currentTabs == 'pj'}">
+                  <a href ng-click="vmRG.changeTabs('pj')" class="ng-binding">PJ</a>
+                </li>
+                <li ng-class="{'active': vmRG.currentTabs == 'pnj'}">
+                  <a href ng-click="vmRG.changeTabs('pnj')" class="ng-binding">PNJ</a>
+                </li>
+                <li ng-class="{'active': vmRG.currentTabs == 'object'}">
+                  <a href ng-click="vmRG.changeTabs('object')" class="ng-binding">Objet</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active">
+              <!-- PJ list -->
+              <div ng-show="vmRG.currentTabs == 'pj'" class="table-responsive">
+                <div class="lv-item media" ng-repeat="pj in vmRG.vmCD.campaign.playerListObj" ng-hide="pj.inGrid">
+                  <div class="pull-left">
+                    <img draggable dragstart="vmRG.dragStart(pj)" class="lv-img-sm z-index-to-drag" ng-src="{{pj.pictureUrl}}">
+                  </div>
+                  <div class="media-body">
+                    <div class="lv-title">{{pj.name}}</div>
+                  </div>
+                </div>
+              </div>
+              <!-- PJN list -->
+              <div ng-show="vmRG.currentTabs == 'pnj'" class="table-responsive">
+                <div class="lv-item media" ng-repeat="pnj in vmRG.pnjList" ng-hide="pnj.inGrid">
+                  <div class="pull-left">
+                    <img draggable dragstart="vmRG.dragStart(pnj)" class="lv-img-sm z-index-to-drag" ng-src="{{pnj.pictureUrl}}">
+                  </div>
+                  <div class="media-body">
+                    <div class="lv-title">{{pnj.name}}</div>
+                  </div>
+                </div>
+                <div class="lv-item media">
+                  <button ng-click="vmRG.openModalAddPnj()" class="btn btn-primary waves-effect">Ajouter</button>
+                </div>
+              </div>
+              <!-- OBJ list -->
+              <div ng-show="vmRG.currentTabs == 'object'" class="table-responsive">
+                <div class="lv-item media" ng-repeat="obj in vmRG.objList">
+                  <div class="pull-left">
+                    <img draggable dragstart="vmRG.dragStart(obj)" class="lv-img-sm z-index-to-drag" ng-src="{{obj.pictureUrl}}">
+                  </div>
+                  <div class="media-body">
+                    <div class="lv-title">{{obj.name}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
