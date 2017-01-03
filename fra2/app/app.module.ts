@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }  from './app.component';
 
+import { SDKBrowserModule }  from './shared/sdk/index';
+
 @NgModule({
-  imports:      [ BrowserModule ],
+  imports:      [ BrowserModule, SDKBrowserModule.forRoot() ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]
 })

@@ -5,9 +5,12 @@
   "scripts": {
     "start": "node .",
     "pretest": "eslint .",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint && nsp check",
+    "build:sdk": "./node_modules/.bin/lb-sdk server/server fra2/app/shared/sdk -i disabled"
   },
   "dependencies": {
+    "@mean-expert/loopback-component-realtime": "^1.0.0-rc.2",
+    "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.7",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "gpio": "latest",
